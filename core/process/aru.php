@@ -51,6 +51,11 @@ if (isset($_POST['type'])) {
 	$postRequest = $_POST['type'];
 	$request = "postRequest";
 }
+
+$wawa = false;
+$wawa = true;
+$limit = " and latitude > (52.22967560000001-0.175848) and latitude < (52.22967560000001+0.175848) and longitude > (21.012228700000037-0.107917) and longitude < (21.012228700000037+0.107917)";
+
 switch ($request) {
 	############################
 	//
@@ -62,7 +67,9 @@ switch ($request) {
 		// Right now
 		// ---------
 
-		$req = "SELECT COUNT(*) AS total FROM pokemon WHERE disappear_time >= UTC_TIMESTAMP()";
+		// $req = "SELECT COUNT(*) AS total FROM pokemon WHERE disappear_time >= UTC_TIMESTAMP()";
+		$req = "SELECT COUNT(*) AS total FROM pokemon WHERE disappear_time >= UTC_TIMESTAMP()" . ($wawa ? $limit : '');
+// 		$req = "SELECT COUNT(*) AS total FROM pokemon WHERE disappear_time >= UTC_TIMESTAMP() and latitude > (52.22967560000001-0.175848) and latitude < (52.22967560000001+0.175848) and longitude > (21.012228700000037-0.107917) and longitude < (21.012228700000037+0.107917)";
 		$result = $mysqli->query($req);
 		$data = $result->fetch_object();
 
@@ -72,7 +79,9 @@ switch ($request) {
 		// Lured stops
 		// -----------
 
-		$req = "SELECT COUNT(*) AS total FROM pokestop WHERE lure_expiration >= UTC_TIMESTAMP()";
+		// $req = "SELECT COUNT(*) AS total FROM pokestop WHERE lure_expiration >= UTC_TIMESTAMP()";
+		$req = "SELECT COUNT(*) AS total FROM pokestop WHERE lure_expiration >= UTC_TIMESTAMP()" . ($wawa ? $limit : '');
+// 		$req = "SELECT COUNT(*) AS total FROM pokestop WHERE lure_expiration >= UTC_TIMESTAMP() and latitude > (52.22967560000001-0.175848) and latitude < (52.22967560000001+0.175848) and longitude > (21.012228700000037-0.107917) and longitude < (21.012228700000037+0.107917)";
 		$result = $mysqli->query($req);
 		$data = $result->fetch_object();
 
@@ -83,7 +92,9 @@ switch ($request) {
 		// Team battle
 		// -----------
 
-		$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym";
+		// $req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym";
+		$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym" . ($wawa ? $limit : '');
+// 		$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE latitude > (52.22967560000001-0.175848) and latitude < (52.22967560000001+0.175848) and longitude > (21.012228700000037-0.107917) and longitude < (21.012228700000037+0.107917)";
 		$result = $mysqli->query($req);
 		$data = $result->fetch_object();
 
@@ -94,7 +105,9 @@ switch ($request) {
 		// 2 = rouge
 		// 3 = jaune
 
-		$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '2'";
+		// $req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '2'";
+		$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '2'" . ($wawa ? $limit : '');
+// 		$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '2' and latitude > (52.22967560000001-0.175848) and latitude < (52.22967560000001+0.175848) and longitude > (21.012228700000037-0.107917) and longitude < (21.012228700000037+0.107917)";
 		$result = $mysqli->query($req);
 		$data = $result->fetch_object();
 
@@ -102,7 +115,9 @@ switch ($request) {
 		$values[] = $data->total;
 
 
-		$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '1'";
+		// $req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '1'";
+		$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '1'" . ($wawa ? $limit : '');
+// 		$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '1' and latitude > (52.22967560000001-0.175848) and latitude < (52.22967560000001+0.175848) and longitude > (21.012228700000037-0.107917) and longitude < (21.012228700000037+0.107917)";
 		$result = $mysqli->query($req);
 		$data = $result->fetch_object();
 
@@ -110,14 +125,18 @@ switch ($request) {
 		$values[] = $data->total;
 
 
-		$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '3'";
+		// $req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '3'";
+		$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '3'" . ($wawa ? $limit : '');
+// 		$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '3' and latitude > (52.22967560000001-0.175848) and latitude < (52.22967560000001+0.175848) and longitude > (21.012228700000037-0.107917) and longitude < (21.012228700000037+0.107917)";
 		$result = $mysqli->query($req);
 		$data = $result->fetch_object();
 
 		// Yellow
 		$values[] = $data->total;
 
-		$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '0'";
+		// $req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '0'";
+		$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '0'" . ($wawa ? $limit : '');
+// 		$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '0' and latitude > (52.22967560000001-0.175848) and latitude < (52.22967560000001+0.175848) and longitude > (21.012228700000037-0.107917) and longitude < (21.012228700000037+0.107917)";
 		$result = $mysqli->query($req);
 		$data = $result->fetch_object();
 
@@ -158,6 +177,7 @@ switch ($request) {
 					latitude, longitude, cp, individual_attack, individual_defense, individual_stamina
 					FROM pokemon
 					WHERE pokemon_id IN (".implode(",", $mythic_pokemons).")
+					" . ($wawa ? $limit : '') . "
 					ORDER BY last_modified DESC
 					LIMIT 0,12";
 		} else {
