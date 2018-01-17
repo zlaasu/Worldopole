@@ -52,9 +52,7 @@ if (isset($_POST['type'])) {
 	$request = "postRequest";
 }
 
-$wawa = false;
-$wawa = true;
-$limit = " and latitude > (52.22967560000001-0.175848) and latitude < (52.22967560000001+0.175848) and longitude > (21.012228700000037-0.107917) and longitude < (21.012228700000037+0.107917)";
+include_once(SYS_PATH.'/cities.php');
 
 switch ($request) {
 	############################
@@ -67,9 +65,8 @@ switch ($request) {
 		// Right now
 		// ---------
 
-		// $req = "SELECT COUNT(*) AS total FROM pokemon WHERE disappear_time >= UTC_TIMESTAMP()";
+		// $req = "SELECT COUNT(*) AS total FROM pokemon WH ERE disappear_time >= UTC_TIMESTAMP()";
 		$req = "SELECT COUNT(*) AS total FROM pokemon WHERE disappear_time >= UTC_TIMESTAMP()" . ($wawa ? $limit : '');
-// 		$req = "SELECT COUNT(*) AS total FROM pokemon WHERE disappear_time >= UTC_TIMESTAMP() and latitude > (52.22967560000001-0.175848) and latitude < (52.22967560000001+0.175848) and longitude > (21.012228700000037-0.107917) and longitude < (21.012228700000037+0.107917)";
 		$result = $mysqli->query($req);
 		$data = $result->fetch_object();
 
@@ -81,7 +78,6 @@ switch ($request) {
 
 		// $req = "SELECT COUNT(*) AS total FROM pokestop WHERE lure_expiration >= UTC_TIMESTAMP()";
 		$req = "SELECT COUNT(*) AS total FROM pokestop WHERE lure_expiration >= UTC_TIMESTAMP()" . ($wawa ? $limit : '');
-// 		$req = "SELECT COUNT(*) AS total FROM pokestop WHERE lure_expiration >= UTC_TIMESTAMP() and latitude > (52.22967560000001-0.175848) and latitude < (52.22967560000001+0.175848) and longitude > (21.012228700000037-0.107917) and longitude < (21.012228700000037+0.107917)";
 		$result = $mysqli->query($req);
 		$data = $result->fetch_object();
 
@@ -93,8 +89,7 @@ switch ($request) {
 		// -----------
 
 		// $req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym";
-		$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym" . ($wawa ? $limit : '');
-// 		$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE latitude > (52.22967560000001-0.175848) and latitude < (52.22967560000001+0.175848) and longitude > (21.012228700000037-0.107917) and longitude < (21.012228700000037+0.107917)";
+		$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE true " . ($wawa ? $limit : '');
 		$result = $mysqli->query($req);
 		$data = $result->fetch_object();
 
@@ -107,7 +102,6 @@ switch ($request) {
 
 		// $req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '2'";
 		$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '2'" . ($wawa ? $limit : '');
-// 		$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '2' and latitude > (52.22967560000001-0.175848) and latitude < (52.22967560000001+0.175848) and longitude > (21.012228700000037-0.107917) and longitude < (21.012228700000037+0.107917)";
 		$result = $mysqli->query($req);
 		$data = $result->fetch_object();
 
@@ -117,7 +111,6 @@ switch ($request) {
 
 		// $req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '1'";
 		$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '1'" . ($wawa ? $limit : '');
-// 		$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '1' and latitude > (52.22967560000001-0.175848) and latitude < (52.22967560000001+0.175848) and longitude > (21.012228700000037-0.107917) and longitude < (21.012228700000037+0.107917)";
 		$result = $mysqli->query($req);
 		$data = $result->fetch_object();
 
@@ -127,7 +120,6 @@ switch ($request) {
 
 		// $req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '3'";
 		$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '3'" . ($wawa ? $limit : '');
-// 		$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '3' and latitude > (52.22967560000001-0.175848) and latitude < (52.22967560000001+0.175848) and longitude > (21.012228700000037-0.107917) and longitude < (21.012228700000037+0.107917)";
 		$result = $mysqli->query($req);
 		$data = $result->fetch_object();
 
@@ -136,7 +128,6 @@ switch ($request) {
 
 		// $req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '0'";
 		$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '0'" . ($wawa ? $limit : '');
-// 		$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '0' and latitude > (52.22967560000001-0.175848) and latitude < (52.22967560000001+0.175848) and longitude > (21.012228700000037-0.107917) and longitude < (21.012228700000037+0.107917)";
 		$result = $mysqli->query($req);
 		$data = $result->fetch_object();
 
@@ -177,7 +168,7 @@ switch ($request) {
 					latitude, longitude, cp, individual_attack, individual_defense, individual_stamina
 					FROM pokemon
 					WHERE pokemon_id IN (".implode(",", $mythic_pokemons).")
-					" . ($wawa ? $limit : '') . "
+					 " . ($wawa ? $limit : '') . "
 					ORDER BY last_modified DESC
 					LIMIT 0,12";
 		} else {
@@ -185,6 +176,7 @@ switch ($request) {
 			$req = "SELECT pokemon_id, encounter_id, disappear_time, last_modified, (CONVERT_TZ(disappear_time, '+00:00', '".$time_offset."')) AS disappear_time_real,
 					latitude, longitude, cp, individual_attack, individual_defense, individual_stamina
 					FROM pokemon
+					 WHERE true " . ($wawa ? $limit : '') . "
 					ORDER BY last_modified DESC
 					LIMIT 0,12";
 		}
@@ -282,6 +274,7 @@ switch ($request) {
 				$countdown = $last_seen - time();
 				$new_spawn['countdown'] = $countdown;
 				$new_spawn['pokemon_uid'] = $pokeuid;
+				// $new_spawn['req'] = var_dump($req);
 				$total_spawns[] = $new_spawn;
 			} else {
 				break;
@@ -302,7 +295,8 @@ switch ($request) {
 
 	case 'pokestop':
 		$where = "";
-		$req = "SELECT latitude, longitude, lure_expiration, UTC_TIMESTAMP() AS now, (CONVERT_TZ(lure_expiration, '+00:00', '".$time_offset."')) AS lure_expiration_real FROM pokestop ";
+		/*$req = "SELECT latitude, longitude, lure_expiration, UTC_TIMESTAMP() AS now, (CONVERT_TZ(lure_expiration, '+00:00', '".$time_offset."')) AS lure_expiration_real FROM pokestop ";*/
+		$req = "SELECT latitude, longitude, lure_expiration, UTC_TIMESTAMP() AS now, (CONVERT_TZ(lure_expiration, '+00:00', '".$time_offset."')) AS lure_expiration_real FROM pokestop WHERE true" . ($wawa ? $limit : '');
 
 		$result = $mysqli->query($req);
 
@@ -348,7 +342,8 @@ switch ($request) {
 
 
 		foreach ($teams as $team_name => $team_id) {
-			$req = "SELECT COUNT(DISTINCT(gym_id)) AS total, ROUND(AVG(total_cp),0) AS average_points FROM gym WHERE team_id = '".$team_id."'";
+			// $req = "SELECT COUNT(DISTINCT(gym_id)) AS total, ROUND(AVG(total_cp),0) AS average_points FROM gym WHERE team_id = '".$team_id."'";
+			$req = "SELECT COUNT(DISTINCT(gym_id)) AS total, ROUND(AVG(total_cp),0) AS average_points FROM gym WHERE team_id = '".$team_id."'" . ($wawa ? $limit : '');
 			$result = $mysqli->query($req);
 			$data = $result->fetch_object();
 
@@ -370,7 +365,8 @@ switch ($request) {
 
 
 	case 'gym_map':
-		$req = "SELECT gym_id, team_id, latitude, longitude, (CONVERT_TZ(last_scanned, '+00:00', '".$time_offset."')) AS last_scanned, (6 - slots_available) AS level FROM gym";
+		/*$req = "SELECT gym_id, team_id, latitude, longitude, (CONVERT_TZ(last_scanned, '+00:00', '".$time_offset."')) AS last_scanned, (6 - slots_available) AS level FROM gym";*/
+		$req = "SELECT gym_id, team_id, latitude, longitude, (CONVERT_TZ(last_scanned, '+00:00', '".$time_offset."')) AS last_scanned, (6 - slots_available) AS level FROM gym WHERE true" . ($wawa ? $limit : '');
 		$result = $mysqli->query($req);
 
 		$gyms = [];
@@ -675,14 +671,19 @@ switch ($request) {
 			$page = mysqli_real_escape_string($mysqli, $_GET['page']);
 		}
 
-		$limit = " LIMIT ".($page * 10).",10";
+		$reqLimit = " LIMIT ".($page * 10).",10";
 
+		/*$req = "SELECT raid.gym_id, raid.level, raid.pokemon_id, raid.cp, raid.move_1, raid.move_2, CONVERT_TZ(raid.spawn, '+00:00', '".$time_offset."') AS spawn, CONVERT_TZ(raid.start, '+00:00', '".$time_offset."') AS start, CONVERT_TZ(raid.end, '+00:00', '".$time_offset."') AS end, CONVERT_TZ(raid.last_scanned, '+00:00', '".$time_offset."') AS last_scanned, gymdetails.name, gym.latitude, gym.longitude FROM raid
+				JOIN gymdetails ON gymdetails.gym_id = raid.gym_id
+				JOIN gym ON gym.gym_id = raid.gym_id
+				WHERE raid.end > UTC_TIMESTAMP()
+				ORDER BY raid.level DESC, raid.start".$limit;*/
 		$req = "SELECT raid.gym_id, raid.level, raid.pokemon_id, raid.cp, raid.move_1, raid.move_2, CONVERT_TZ(raid.spawn, '+00:00', '".$time_offset."') AS spawn, CONVERT_TZ(raid.start, '+00:00', '".$time_offset."') AS start, CONVERT_TZ(raid.end, '+00:00', '".$time_offset."') AS end, CONVERT_TZ(raid.last_scanned, '+00:00', '".$time_offset."') AS last_scanned, gymdetails.name, gym.latitude, gym.longitude FROM raid
 				JOIN gymdetails ON gymdetails.gym_id = raid.gym_id
 				JOIN gym ON gym.gym_id = raid.gym_id
 				WHERE raid.end > UTC_TIMESTAMP()
-				ORDER BY raid.level DESC, raid.start".$limit;
-
+				" . ($wawa ? $limit : '') . "
+				ORDER BY raid.level DESC, raid.start".$reqLimit;
 		$result = $mysqli->query($req);
 		$raids = array();
 		while ($data = $result->fetch_object()) {
@@ -714,8 +715,10 @@ switch ($request) {
 
 		break;
 
+	// pokemon
 	case 'pokemon_slider_init':
 		$req = "SELECT MIN(disappear_time) AS min, MAX(disappear_time) AS max FROM pokemon";
+		$req = "SELECT MIN(disappear_time) AS min, MAX(disappear_time) AS max FROM pokemon WHERE true" . ($wawa ? $limit : '');
 		$result 	= $mysqli->query($req);
 		$bounds		= $result->fetch_object();
 
@@ -724,7 +727,7 @@ switch ($request) {
 
 		break;
 
-
+	// pokemon
 	case 'pokemon_heatmap_points':
 		$json = "";
 		if (isset($_GET['start']) && isset($_GET['end']) && isset($_GET['pokemon_id'])) {
@@ -732,7 +735,8 @@ switch ($request) {
 			$end = date("Y-m-d H:i", (int) $_GET['end']);
 			$pokemon_id = mysqli_real_escape_string($mysqli, $_GET['pokemon_id']);
 			$where = " WHERE pokemon_id = ".$pokemon_id." "
-					. "AND disappear_time BETWEEN '".$start."' AND '".$end."'";
+					// . "AND disappear_time BETWEEN '".$start."' AND '".$end."'";
+					. "AND disappear_time BETWEEN '".$start."' AND '".$end."'" . ($wawa ? $limit : '');
 			$req 		= "SELECT latitude, longitude FROM pokemon".$where." ORDER BY disappear_time DESC LIMIT 10000";
 			$result = $mysqli->query($req);
 			$points = array();
@@ -747,10 +751,12 @@ switch ($request) {
 		echo $json;
 		break;
 
-
+	// nests
+	// pokemon
 	case 'maps_localization_coordinates':
 		$json = "";
-		$req = "SELECT MAX(latitude) AS max_latitude, MIN(latitude) AS min_latitude, MAX(longitude) AS max_longitude, MIN(longitude) as min_longitude FROM spawnpoint";
+		// $req = "SELECT MAX(latitude) AS max_latitude, MIN(latitude) AS min_latitude, MAX(longitude) AS max_longitude, MIN(longitude) as min_longitude FROM spawnpoint";
+		$req = "SELECT MAX(latitude) AS max_latitude, MIN(latitude) AS min_latitude, MAX(longitude) AS max_longitude, MIN(longitude) as min_longitude FROM spawnpoint WHERE true" . ($wawa ? $limit : '');
 		$result = $mysqli->query($req);
 		$coordinates = $result->fetch_object();
 
@@ -759,14 +765,22 @@ switch ($request) {
 
 		break;
 
-
+	// pokemon
 	case 'pokemon_graph_data':
 		$json = "";
 		if (isset($_GET['pokemon_id'])) {
 			$pokemon_id = mysqli_real_escape_string($mysqli, $_GET['pokemon_id']);
-			$req = "SELECT COUNT(*) AS total,
+			/*$req = "SELECT COUNT(*) AS total,
 					HOUR(CONVERT_TZ(disappear_time, '+00:00', '".$time_offset."')) AS disappear_hour
 					FROM (SELECT disappear_time FROM pokemon WHERE pokemon_id = '".$pokemon_id."' ORDER BY disappear_time LIMIT 10000) AS pokemonFiltered
+					GROUP BY disappear_hour
+					ORDER BY disappear_hour";*/
+			$req = "SELECT COUNT(*) AS total,
+					HOUR(CONVERT_TZ(disappear_time, '+00:00', '".$time_offset."')) AS disappear_hour
+					FROM (SELECT disappear_time FROM pokemon 
+					WHERE pokemon_id = '".$pokemon_id."' 
+					" . ($wawa ? $limit : '') . "
+					ORDER BY disappear_time LIMIT 10000) AS pokemonFiltered
 					GROUP BY disappear_hour
 					ORDER BY disappear_hour";
 			$result = $mysqli->query($req);
@@ -802,7 +816,8 @@ if ($postRequest != "") {
 			if (isset($_POST['pokemon_id'])) {
 				$pokemon_id = mysqli_real_escape_string($mysqli, $_POST['pokemon_id']);
 				$inmap_pkms_filter = "";
-				$where = " WHERE disappear_time >= UTC_TIMESTAMP() AND pokemon_id = ".$pokemon_id;
+				// $where = " WHERE disappear_time >= UTC_TIMESTAMP() AND pokemon_id = ".$pokemon_id;
+				$where = " WHERE disappear_time >= UTC_TIMESTAMP() AND pokemon_id = ".$pokemon_id." ".($wawa ? $limit : '');
 
 				$reqTestIv = "SELECT MAX(individual_attack) AS iv FROM pokemon ".$where;
 				$resultTestIv = $mysqli->query($reqTestIv);
