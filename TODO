@@ -1,0 +1,16 @@
+TODO
+
+data.loader.php
+- linia 235 
+	// Trainer with highest Pokemon
+	pytanie zwraca wszystkich trenerow
+
+cities.php
+- sprawdzic poprawnosc wyliczania promienia na mniejszych lokalizacjach niz warszawa
+
+aru.php
+- linia 563
+	pytanie zwraca wszystkich trenerow
+
+/map/?lat=53.394523&lon=14.671778&zoom=17
+	pusta strona
