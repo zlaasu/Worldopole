@@ -17,12 +17,14 @@ $pokemon_stats['timestamp'] = $timestamp;
 
 
 $req = "SELECT COUNT(*) AS total FROM pokemon WHERE disappear_time >= UTC_TIMESTAMP()";
+$req = "SELECT COUNT(*) AS total FROM pokemon WHERE disappear_time >= UTC_TIMESTAMP()" . ($wawa ? $limit : '');
 $result = $mysqli->query($req);
 $data = $result->fetch_object();
 
 $pokemon_stats['pokemon_now'] = $data->total;
 
 $req = "SELECT pokemon_id FROM pokemon WHERE disappear_time >= UTC_TIMESTAMP()";
+$req = "SELECT pokemon_id FROM pokemon WHERE disappear_time >= UTC_TIMESTAMP()" . ($wawa ? $limit : '');
 $result = $mysqli->query($req);
 
 $rarityarray = array();
