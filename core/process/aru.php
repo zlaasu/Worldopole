@@ -274,6 +274,7 @@ switch ($request) {
 				$countdown = $last_seen - time();
 				$new_spawn['countdown'] = $countdown;
 				$new_spawn['pokemon_uid'] = $pokeuid;
+				// $new_spawn['req'] = var_dump($req);
 				$total_spawns[] = $new_spawn;
 			} else {
 				break;
