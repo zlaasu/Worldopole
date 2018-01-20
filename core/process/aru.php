@@ -718,7 +718,7 @@ switch ($request) {
 	// pokemon
 	case 'pokemon_slider_init':
 		$req = "SELECT MIN(disappear_time) AS min, MAX(disappear_time) AS max FROM pokemon";
-		$req = "SELECT MIN(disappear_time) AS min, MAX(disappear_time) AS max FROM pokemon WHERE true" . ($wawa ? $limit : '');
+		// $req = "SELECT MIN(disappear_time) AS min, MAX(disappear_time) AS max FROM pokemon WHERE true" . ($wawa ? $limit : '');
 		$result 	= $mysqli->query($req);
 		$bounds		= $result->fetch_object();
 
@@ -735,8 +735,8 @@ switch ($request) {
 			$end = date("Y-m-d H:i", (int) $_GET['end']);
 			$pokemon_id = mysqli_real_escape_string($mysqli, $_GET['pokemon_id']);
 			$where = " WHERE pokemon_id = ".$pokemon_id." "
-					// . "AND disappear_time BETWEEN '".$start."' AND '".$end."'";
-					. "AND disappear_time BETWEEN '".$start."' AND '".$end."'" . ($wawa ? $limit : '');
+					. "AND disappear_time BETWEEN '".$start."' AND '".$end."'";
+					// . "AND disappear_time BETWEEN '".$start."' AND '".$end."'" . ($wawa ? $limit : '');
 			$req 		= "SELECT latitude, longitude FROM pokemon".$where." ORDER BY disappear_time DESC LIMIT 10000";
 			$result = $mysqli->query($req);
 			$points = array();
@@ -755,8 +755,8 @@ switch ($request) {
 	// pokemon
 	case 'maps_localization_coordinates':
 		$json = "";
-		// $req = "SELECT MAX(latitude) AS max_latitude, MIN(latitude) AS min_latitude, MAX(longitude) AS max_longitude, MIN(longitude) as min_longitude FROM spawnpoint";
-		$req = "SELECT MAX(latitude) AS max_latitude, MIN(latitude) AS min_latitude, MAX(longitude) AS max_longitude, MIN(longitude) as min_longitude FROM spawnpoint WHERE true" . ($wawa ? $limit : '');
+		$req = "SELECT MAX(latitude) AS max_latitude, MIN(latitude) AS min_latitude, MAX(longitude) AS max_longitude, MIN(longitude) as min_longitude FROM spawnpoint";
+		// $req = "SELECT MAX(latitude) AS max_latitude, MIN(latitude) AS min_latitude, MAX(longitude) AS max_longitude, MIN(longitude) as min_longitude FROM spawnpoint WHERE true" . ($wawa ? $limit : '');
 		$result = $mysqli->query($req);
 		$coordinates = $result->fetch_object();
 
@@ -816,8 +816,8 @@ if ($postRequest != "") {
 			if (isset($_POST['pokemon_id'])) {
 				$pokemon_id = mysqli_real_escape_string($mysqli, $_POST['pokemon_id']);
 				$inmap_pkms_filter = "";
-				// $where = " WHERE disappear_time >= UTC_TIMESTAMP() AND pokemon_id = ".$pokemon_id;
-				$where = " WHERE disappear_time >= UTC_TIMESTAMP() AND pokemon_id = ".$pokemon_id." ".($wawa ? $limit : '');
+				$where = " WHERE disappear_time >= UTC_TIMESTAMP() AND pokemon_id = ".$pokemon_id;
+				// $where = " WHERE disappear_time >= UTC_TIMESTAMP() AND pokemon_id = ".$pokemon_id." ".($wawa ? $limit : '');
 
 				$reqTestIv = "SELECT MAX(individual_attack) AS iv FROM pokemon ".$where;
 				$resultTestIv = $mysqli->query($reqTestIv);
