@@ -295,8 +295,8 @@ switch ($request) {
 
 	case 'pokestop':
 		$where = "";
-		/*$req = "SELECT latitude, longitude, lure_expiration, UTC_TIMESTAMP() AS now, (CONVERT_TZ(lure_expiration, '+00:00', '".$time_offset."')) AS lure_expiration_real FROM pokestop ";*/
-		$req = "SELECT latitude, longitude, lure_expiration, UTC_TIMESTAMP() AS now, (CONVERT_TZ(lure_expiration, '+00:00', '".$time_offset."')) AS lure_expiration_real FROM pokestop WHERE true" . ($wawa ? $limit : '');
+		$req = "SELECT latitude, longitude, lure_expiration, UTC_TIMESTAMP() AS now, (CONVERT_TZ(lure_expiration, '+00:00', '".$time_offset."')) AS lure_expiration_real FROM pokestop ";
+		// $req = "SELECT latitude, longitude, lure_expiration, UTC_TIMESTAMP() AS now, (CONVERT_TZ(lure_expiration, '+00:00', '".$time_offset."')) AS lure_expiration_real FROM pokestop WHERE true" . ($wawa ? $limit : '');
 
 		$result = $mysqli->query($req);
 
@@ -751,8 +751,7 @@ switch ($request) {
 		echo $json;
 		break;
 
-	// nests
-	// pokemon
+	// kazda mapa
 	case 'maps_localization_coordinates':
 		$json = "";
 		$req = "SELECT MAX(latitude) AS max_latitude, MIN(latitude) AS min_latitude, MAX(longitude) AS max_longitude, MIN(longitude) as min_longitude FROM spawnpoint";
