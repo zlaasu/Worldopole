@@ -134,7 +134,7 @@ if (!empty($page)) {
 
 			// Total gym protected
 
-			$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE guard_pokemon_id = '".$pokemon_id."'";
+			// $req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE guard_pokemon_id = '".$pokemon_id."'";
 			$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE guard_pokemon_id = '".$pokemon_id."'" . ($wawa ? $limit : '');
 			$result = $mysqli->query($req);
 			$data = $result->fetch_object();
@@ -340,7 +340,7 @@ if (!empty($page)) {
 			foreach ($teams as $team_key => $team_values) {
 				// Team Guardians
 
-				$req = "SELECT COUNT(*) AS total, guard_pokemon_id FROM gym WHERE team_id = '".$team_values->id."' GROUP BY guard_pokemon_id ORDER BY total DESC LIMIT 0,3";
+				// $req = "SELECT COUNT(*) AS total, guard_pokemon_id FROM gym WHERE team_id = '".$team_values->id."' GROUP BY guard_pokemon_id ORDER BY total DESC LIMIT 0,3";
 				$req = "SELECT COUNT(*) AS total, guard_pokemon_id FROM gym WHERE team_id = '".$team_values->id."' " . ($wawa ? $limit : '') . " GROUP BY guard_pokemon_id ORDER BY total DESC LIMIT 0,3";
 				$result = $mysqli->query($req);
 
@@ -355,7 +355,7 @@ if (!empty($page)) {
 
 				// Gym owned and average points
 
-				$req 	= "SELECT COUNT(DISTINCT(gym_id)) AS total, ROUND(AVG(total_cp),0) AS average_points FROM gym WHERE team_id = '".$team_values->id."'";
+				// $req 	= "SELECT COUNT(DISTINCT(gym_id)) AS total, ROUND(AVG(total_cp),0) AS average_points FROM gym WHERE team_id = '".$team_values->id."'";
 				$req 	= "SELECT COUNT(DISTINCT(gym_id)) AS total, ROUND(AVG(total_cp),0) AS average_points FROM gym WHERE team_id = '".$team_values->id."'" . ($wawa ? $limit : '');
 				$result = $mysqli->query($req);
 				$data	= $result->fetch_object();

@@ -342,8 +342,8 @@ switch ($request) {
 
 
 		foreach ($teams as $team_name => $team_id) {
-			// $req = "SELECT COUNT(DISTINCT(gym_id)) AS total, ROUND(AVG(total_cp),0) AS average_points FROM gym WHERE team_id = '".$team_id."'";
-			$req = "SELECT COUNT(DISTINCT(gym_id)) AS total, ROUND(AVG(total_cp),0) AS average_points FROM gym WHERE team_id = '".$team_id."'" . ($wawa ? $limit : '');
+			$req = "SELECT COUNT(DISTINCT(gym_id)) AS total, ROUND(AVG(total_cp),0) AS average_points FROM gym WHERE team_id = '".$team_id."'";
+			// $req = "SELECT COUNT(DISTINCT(gym_id)) AS total, ROUND(AVG(total_cp),0) AS average_points FROM gym WHERE team_id = '".$team_id."'" . ($wawa ? $limit : '');
 			$result = $mysqli->query($req);
 			$data = $result->fetch_object();
 
@@ -365,8 +365,8 @@ switch ($request) {
 
 
 	case 'gym_map':
-		/*$req = "SELECT gym_id, team_id, latitude, longitude, (CONVERT_TZ(last_scanned, '+00:00', '".$time_offset."')) AS last_scanned, (6 - slots_available) AS level FROM gym";*/
-		$req = "SELECT gym_id, team_id, latitude, longitude, (CONVERT_TZ(last_scanned, '+00:00', '".$time_offset."')) AS last_scanned, (6 - slots_available) AS level FROM gym WHERE true" . ($wawa ? $limit : '');
+		$req = "SELECT gym_id, team_id, latitude, longitude, (CONVERT_TZ(last_scanned, '+00:00', '".$time_offset."')) AS last_scanned, (6 - slots_available) AS level FROM gym";
+		// $req = "SELECT gym_id, team_id, latitude, longitude, (CONVERT_TZ(last_scanned, '+00:00', '".$time_offset."')) AS last_scanned, (6 - slots_available) AS level FROM gym WHERE true" . ($wawa ? $limit : '');
 		$result = $mysqli->query($req);
 
 		$gyms = [];
