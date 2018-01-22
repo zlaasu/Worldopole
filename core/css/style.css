@@ -87,6 +87,13 @@ Navigation
 	color:#174391;
 }
 
+.menu-select {
+	color: #777;
+	padding: 15px;
+	position: relative;
+	display: block;
+}
+
 /****************
 Page Header 
 ****************/

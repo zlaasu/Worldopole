@@ -12,8 +12,12 @@ aru.php
 - linia 563
 	pytanie zwraca wszystkich trenerow
 
+pokedex
+	pokazuje total dla calej pl
+
 /map/?lat=53.394523&lon=14.671778&zoom=17
 	pusta strona
+
 
 
 show all data on maps:

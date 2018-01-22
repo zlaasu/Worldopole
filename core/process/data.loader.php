@@ -48,6 +48,7 @@ if ($mysqli->connect_error != '') {
 	header('Location:'.HOST_URL.'offline.html');
 	exit();
 }
+$mysqli->query('SET NAMES utf8');
 
 include_once(SYS_PATH.'/cities.php');
 
@@ -290,14 +291,14 @@ if (!empty($page)) {
 		case 'pokestops':
 			$pokestop = new stdClass();
 
-			$req = "SELECT COUNT(*) AS total FROM pokestop";
+			// $req = "SELECT COUNT(*) AS total FROM pokestop";
 			$req = "SELECT COUNT(*) AS total FROM pokestop WHERE true " . ($wawa ? $limit : '');
 			$result = $mysqli->query($req);
 			$data = $result->fetch_object();
 
 			$pokestop->total = $data->total;
 
-			$req = "SELECT COUNT(*) AS total FROM pokestop WHERE lure_expiration >= UTC_TIMESTAMP()";
+			// $req = "SELECT COUNT(*) AS total FROM pokestop WHERE lure_expiration >= UTC_TIMESTAMP()";
 			$req = "SELECT COUNT(*) AS total FROM pokestop WHERE lure_expiration >= UTC_TIMESTAMP()" . ($wawa ? $limit : '');
 			$result = $mysqli->query($req);
 			$data = $result->fetch_object();

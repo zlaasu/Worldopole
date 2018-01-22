@@ -54,6 +54,12 @@ if (isset($_POST['type'])) {
 
 include_once(SYS_PATH.'/cities.php');
 
+/*$config->infos->city = $cityName;
+if (!$mapCenter == false) {
+	$config->system->map_center_lat  = $mapCenter['lat'];
+	$config->system->map_center_long = $mapCenter['long'];
+}*/
+
 switch ($request) {
 	############################
 	//
@@ -342,8 +348,8 @@ switch ($request) {
 
 
 		foreach ($teams as $team_name => $team_id) {
-			$req = "SELECT COUNT(DISTINCT(gym_id)) AS total, ROUND(AVG(total_cp),0) AS average_points FROM gym WHERE team_id = '".$team_id."'";
-			// $req = "SELECT COUNT(DISTINCT(gym_id)) AS total, ROUND(AVG(total_cp),0) AS average_points FROM gym WHERE team_id = '".$team_id."'" . ($wawa ? $limit : '');
+			// $req = "SELECT COUNT(DISTINCT(gym_id)) AS total, ROUND(AVG(total_cp),0) AS average_points FROM gym WHERE team_id = '".$team_id."'";
+			$req = "SELECT COUNT(DISTINCT(gym_id)) AS total, ROUND(AVG(total_cp),0) AS average_points FROM gym WHERE team_id = '".$team_id."'" . ($wawa ? $limit : '');
 			$result = $mysqli->query($req);
 			$data = $result->fetch_object();
 

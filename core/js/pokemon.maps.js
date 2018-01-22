@@ -10,8 +10,10 @@ var ivMax = 100;
 
 function initMap() {
 	$.getJSON('core/json/variables.json', function(variables) {
-		var latitude = Number(variables['system']['map_center_lat']);
-		var longitude = Number(variables['system']['map_center_long']);
+		// var latitude = Number(variables['system']['map_center_lat']);
+		// var longitude = Number(variables['system']['map_center_long']);
+		var latitude = cityLat ? cityLat : Number(variables.system.map_center_lat);
+		var longitude = cityLong ? cityLong : Number(variables.system.map_center_long);
 		var zoom_level = Number(variables['system']['zoom_level']);
 		var pokeimg_suffix = variables['system']['pokeimg_suffix'];
 
