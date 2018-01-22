@@ -109,9 +109,7 @@ include_once('core/process/data.loader.php');
 			</div> <!-- /.container-fluid -->
 		</nav>
 
-<?php
-$config->infos->city = $cityName;
-?>
+<?php $config->infos->city = $cityName; ?>
 		<div class="container">
 			<?php
 			# Include the pages
@@ -151,14 +149,13 @@ $config->infos->city = $cityName;
 		<script src="core/js/bootstrap.min.js"></script>
 		<script>
 			$('.change-city').change(function(){
-				// console.log("city: "+$(this).val());
-				let d = new Date;
+				const d = new Date;
 				d.setTime(d.getTime() + 86400 * 30);
 				document.cookie = 'city='+$(this).val()+';expires='+d.toUTCString()+';path=/';
 				location.reload();
 			});
-			var cityLat  = <?= (!$mapCenter == false) ? $mapCenter['lat']  : "null" ?>;
-			var cityLong = <?= (!$mapCenter == false) ? $mapCenter['long'] : "null" ?>;
+			const cityLat  = <?= (!$mapCenter == false) ? $mapCenter['lat']  : "null" ?>;
+			const cityLong = <?= (!$mapCenter == false) ? $mapCenter['long'] : "null" ?>;
 		</script>
 
 		<?php // Load scripts only for page
@@ -167,7 +164,6 @@ $config->infos->city = $cityName;
 			<script src="<?php auto_ver('core/js/home.script.js') ?>"></script>
 
 			<script>
-
 				updateCounter(<?= $home->pokemon_now ?>,'.total-pkm-js');
 				updateCounter(<?= $home->pokestop_lured ?>,'.total-lure-js');
 				updateCounter(<?= $home->gyms ?>,'.total-gym-js');
@@ -268,9 +264,6 @@ $config->infos->city = $cityName;
 
 				case 'nests':
 					?>
-<script type="text/javascript">
-console.log(`php lat: ${cityLat}, long: ${cityLong}`);
-</script>
 					<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js"></script>
 					<script src="core/js/nests.maps.js.php"></script>
 					<script src="https://maps.googleapis.com/maps/api/js?key=<?= $config->system->GMaps_Key ?>&libraries=visualization&callback=initMap"></script>

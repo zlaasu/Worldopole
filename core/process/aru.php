@@ -54,12 +54,6 @@ if (isset($_POST['type'])) {
 
 include_once(SYS_PATH.'/cities.php');
 
-/*$config->infos->city = $cityName;
-if (!$mapCenter == false) {
-	$config->system->map_center_lat  = $mapCenter['lat'];
-	$config->system->map_center_long = $mapCenter['long'];
-}*/
-
 switch ($request) {
 	############################
 	//
