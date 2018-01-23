@@ -48,8 +48,6 @@ else {
 	$mapCenter = false;
 }
 
-// var_export($cities);
-
 $selectCity = '
 <span class="menu-select">
 	choose city: <select class="change-city">

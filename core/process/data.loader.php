@@ -209,7 +209,6 @@ if (!empty($page)) {
 						ORDER BY $top_order_by $top_direction, disappear_time DESC
 						LIMIT 0,50";
 
-// die(var_dump($req));
 				$result = $mysqli->query($req);
 				$top = array();
 				while ($data = $result->fetch_object()) {

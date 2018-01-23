@@ -267,7 +267,6 @@ switch ($request) {
 				$countdown = $last_seen - time();
 				$new_spawn['countdown'] = $countdown;
 				$new_spawn['pokemon_uid'] = $pokeuid;
-				// $new_spawn['req'] = var_dump($req);
 				$total_spawns[] = $new_spawn;
 			} else {
 				break;
@@ -703,7 +702,7 @@ switch ($request) {
 
 		break;
 
-	// pokemon
+	// pokemon map
 	case 'pokemon_slider_init':
 		$req = "SELECT MIN(disappear_time) AS min, MAX(disappear_time) AS max FROM pokemon";
 		// $req = "SELECT MIN(disappear_time) AS min, MAX(disappear_time) AS max FROM pokemon WHERE true" . ($citySplit ? $limit : '');
@@ -715,7 +714,7 @@ switch ($request) {
 
 		break;
 
-	// pokemon
+	// pokemon map
 	case 'pokemon_heatmap_points':
 		$json = "";
 		if (isset($_GET['start']) && isset($_GET['end']) && isset($_GET['pokemon_id'])) {
@@ -739,7 +738,7 @@ switch ($request) {
 		echo $json;
 		break;
 
-	// kazda mapa
+	// every map
 	case 'maps_localization_coordinates':
 		$json = "";
 		$req = "SELECT MAX(latitude) AS max_latitude, MIN(latitude) AS min_latitude, MAX(longitude) AS max_longitude, MIN(longitude) as min_longitude FROM spawnpoint";
@@ -752,7 +751,7 @@ switch ($request) {
 
 		break;
 
-	// pokemon
+	// pokemon map
 	case 'pokemon_graph_data':
 		$json = "";
 		if (isset($_GET['pokemon_id'])) {
