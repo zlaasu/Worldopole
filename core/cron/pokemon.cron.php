@@ -16,13 +16,13 @@ include_once(SYS_PATH.'/core/process/locales.loader.php');
 $pokemon_stats['timestamp'] = $timestamp;
 
 
-$req = "SELECT COUNT(*) AS total FROM pokemon WHERE disappear_time >= UTC_TIMESTAMP()" . ($wawa ? $limit : '');
+$req = "SELECT COUNT(*) AS total FROM pokemon WHERE disappear_time >= UTC_TIMESTAMP()" . ($citySplit ? $limit : '');
 $result = $mysqli->query($req);
 $data = $result->fetch_object();
 
 $pokemon_stats['pokemon_now'] = $data->total;
 
-$req = "SELECT pokemon_id FROM pokemon WHERE disappear_time >= UTC_TIMESTAMP()" . ($wawa ? $limit : '');
+$req = "SELECT pokemon_id FROM pokemon WHERE disappear_time >= UTC_TIMESTAMP()" . ($citySplit ? $limit : '');
 $result = $mysqli->query($req);
 
 $rarityarray = array();

@@ -22,7 +22,7 @@ for ($pid = 1; $pid <= $maxpid; $pid++) {
                     " . $where."
                 ) x
                 ON r.gym_id = g.gym_id
-                " . $where . ($wawa ? $limit : '') . "
+                " . $where . ($citySplit ? $limit : '') . "
                 ORDER BY start DESC
                 LIMIT 0,1";
 
