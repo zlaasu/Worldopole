@@ -9,7 +9,6 @@
 
 $pokestop['timestamp'] = $timestamp;
 
-$req = "SELECT COUNT(*) AS total FROM pokestop";
 $req = "SELECT COUNT(*) AS total FROM pokestop WHERE true" . ($wawa ? $limit : '');
 $result = $mysqli->query($req);
 $data = $result->fetch_object();

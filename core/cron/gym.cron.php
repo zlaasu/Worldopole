@@ -10,7 +10,7 @@
 
 $gym['timestamp'] = $timestamp;
 
-$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym";
+// $req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym";
 $req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE true" . ($wawa ? $limit : '');
 $result = $mysqli->query($req);
 $data = $result->fetch_object();
@@ -20,7 +20,7 @@ $gym['total'] = $data->total;
 
 // Mystic
 
-$req = "SELECT COUNT(DISTINCT(gym_id)) AS total, ROUND(AVG(total_cp),0) AS average_points FROM gym WHERE team_id = '1'";
+// $req = "SELECT COUNT(DISTINCT(gym_id)) AS total, ROUND(AVG(total_cp),0) AS average_points FROM gym WHERE team_id = '1'";
 $req = "SELECT COUNT(DISTINCT(gym_id)) AS total, ROUND(AVG(total_cp),0) AS average_points FROM gym WHERE team_id = '1'" . ($wawa ? $limit : '');
 $result = $mysqli->query($req);
 $data = $result->fetch_object();
@@ -31,7 +31,7 @@ $gym['team']['mystic']['average'] = $data->average_points;
 
 // Valor
 
-$req = "SELECT COUNT(DISTINCT(gym_id)) AS total, ROUND(AVG(total_cp),0) AS average_points FROM gym WHERE team_id = '2'";
+// $req = "SELECT COUNT(DISTINCT(gym_id)) AS total, ROUND(AVG(total_cp),0) AS average_points FROM gym WHERE team_id = '2'";
 $req = "SELECT COUNT(DISTINCT(gym_id)) AS total, ROUND(AVG(total_cp),0) AS average_points FROM gym WHERE team_id = '2'" . ($wawa ? $limit : '');
 $result = $mysqli->query($req);
 $data = $result->fetch_object();
@@ -42,7 +42,7 @@ $gym['team']['valor']['average'] = $data->average_points;
 
 // Instinct
 
-$req = "SELECT COUNT(DISTINCT(gym_id)) AS total, ROUND(AVG(total_cp),0) AS average_points FROM gym WHERE team_id = '3'";
+// $req = "SELECT COUNT(DISTINCT(gym_id)) AS total, ROUND(AVG(total_cp),0) AS average_points FROM gym WHERE team_id = '3'";
 $req = "SELECT COUNT(DISTINCT(gym_id)) AS total, ROUND(AVG(total_cp),0) AS average_points FROM gym WHERE team_id = '3'" . ($wawa ? $limit : '');
 $result = $mysqli->query($req);
 $data = $result->fetch_object();
