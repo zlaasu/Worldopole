@@ -65,7 +65,6 @@ switch ($request) {
 		// Right now
 		// ---------
 
-		// $req = "SELECT COUNT(*) AS total FROM pokemon WH ERE disappear_time >= UTC_TIMESTAMP()";
 		$req = "SELECT COUNT(*) AS total FROM pokemon WHERE disappear_time >= UTC_TIMESTAMP()" . ($wawa ? $limit : '');
 		$result = $mysqli->query($req);
 		$data = $result->fetch_object();
@@ -76,7 +75,6 @@ switch ($request) {
 		// Lured stops
 		// -----------
 
-		// $req = "SELECT COUNT(*) AS total FROM pokestop WHERE lure_expiration >= UTC_TIMESTAMP()";
 		$req = "SELECT COUNT(*) AS total FROM pokestop WHERE lure_expiration >= UTC_TIMESTAMP()" . ($wawa ? $limit : '');
 		$result = $mysqli->query($req);
 		$data = $result->fetch_object();
@@ -88,7 +86,6 @@ switch ($request) {
 		// Team battle
 		// -----------
 
-		// $req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym";
 		$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE true " . ($wawa ? $limit : '');
 		$result = $mysqli->query($req);
 		$data = $result->fetch_object();
@@ -100,7 +97,6 @@ switch ($request) {
 		// 2 = rouge
 		// 3 = jaune
 
-		// $req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '2'";
 		$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '2'" . ($wawa ? $limit : '');
 		$result = $mysqli->query($req);
 		$data = $result->fetch_object();
@@ -109,7 +105,6 @@ switch ($request) {
 		$values[] = $data->total;
 
 
-		// $req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '1'";
 		$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '1'" . ($wawa ? $limit : '');
 		$result = $mysqli->query($req);
 		$data = $result->fetch_object();
@@ -118,7 +113,6 @@ switch ($request) {
 		$values[] = $data->total;
 
 
-		// $req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '3'";
 		$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '3'" . ($wawa ? $limit : '');
 		$result = $mysqli->query($req);
 		$data = $result->fetch_object();
@@ -126,7 +120,6 @@ switch ($request) {
 		// Yellow
 		$values[] = $data->total;
 
-		// $req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '0'";
 		$req = "SELECT COUNT(DISTINCT(gym_id)) AS total FROM gym WHERE team_id = '0'" . ($wawa ? $limit : '');
 		$result = $mysqli->query($req);
 		$data = $result->fetch_object();
@@ -673,11 +666,6 @@ switch ($request) {
 
 		$reqLimit = " LIMIT ".($page * 10).",10";
 
-		/*$req = "SELECT raid.gym_id, raid.level, raid.pokemon_id, raid.cp, raid.move_1, raid.move_2, CONVERT_TZ(raid.spawn, '+00:00', '".$time_offset."') AS spawn, CONVERT_TZ(raid.start, '+00:00', '".$time_offset."') AS start, CONVERT_TZ(raid.end, '+00:00', '".$time_offset."') AS end, CONVERT_TZ(raid.last_scanned, '+00:00', '".$time_offset."') AS last_scanned, gymdetails.name, gym.latitude, gym.longitude FROM raid
-				JOIN gymdetails ON gymdetails.gym_id = raid.gym_id
-				JOIN gym ON gym.gym_id = raid.gym_id
-				WHERE raid.end > UTC_TIMESTAMP()
-				ORDER BY raid.level DESC, raid.start".$limit;*/
 		$req = "SELECT raid.gym_id, raid.level, raid.pokemon_id, raid.cp, raid.move_1, raid.move_2, CONVERT_TZ(raid.spawn, '+00:00', '".$time_offset."') AS spawn, CONVERT_TZ(raid.start, '+00:00', '".$time_offset."') AS start, CONVERT_TZ(raid.end, '+00:00', '".$time_offset."') AS end, CONVERT_TZ(raid.last_scanned, '+00:00', '".$time_offset."') AS last_scanned, gymdetails.name, gym.latitude, gym.longitude FROM raid
 				JOIN gymdetails ON gymdetails.gym_id = raid.gym_id
 				JOIN gym ON gym.gym_id = raid.gym_id
