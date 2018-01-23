@@ -281,6 +281,11 @@ if (!empty($page)) {
 				$pokedex->$i->spawn_count = $pokemons->pokemon->$i->spawn_count;
 			}
 
+			$req = "SELECT COUNT(*) AS total_pokemon FROM pokemon WHERE true" . ($wawa ? $limit : '');
+			$result = $mysqli->query($req);
+			$data = $result->fetch_object();
+			$pokedex_total_pokemon = (int) $data->total_pokemon;
+
 
 			break;
 
