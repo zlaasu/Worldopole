@@ -17,6 +17,7 @@ $req = "SELECT p.pokemon_id, max(p.latitude) AS latitude, max(p.longitude) AS lo
         INNER JOIN spawnpoint s ON (p.spawnpoint_id = s.id) 
         WHERE p.disappear_time > UTC_TIMESTAMP() - INTERVAL 24 HOUR 
         ".$pokemon_exclude_sql." 
+		" . ($citySplit ? $limit : '') . "
         GROUP BY p.spawnpoint_id, p.pokemon_id 
         HAVING count(p.pokemon_id) >= 6 
         ORDER BY p.pokemon_id";

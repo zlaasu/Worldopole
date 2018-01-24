@@ -18,8 +18,8 @@ function initMap() {
 			// Get website variables
 
 			$.getJSON('core/json/variables.json', function(variables) {
-				var latitude = Number(variables['system']['map_center_lat']);
-				var longitude = Number(variables['system']['map_center_long']);
+				var latitude = cityLat ? cityLat : Number(variables.system.map_center_lat);
+				var longitude = cityLong ? cityLong : Number(variables.system.map_center_long);
 				var zoom_level = Number(variables['system']['zoom_level']);
 
 				var map = new google.maps.Map(document.getElementById('map'), {

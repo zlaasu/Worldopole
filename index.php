@@ -92,6 +92,14 @@ include_once('core/process/data.loader.php');
 
 									<?php
 									break;
+
+								case 'chooser':
+									?>
+
+									<li> <?= $selectCity ?> </li>
+
+									<?php
+									break;
 							}
 						}
 						?>
@@ -101,6 +109,7 @@ include_once('core/process/data.loader.php');
 			</div> <!-- /.container-fluid -->
 		</nav>
 
+<?php $config->infos->city = $cityName; ?>
 		<div class="container">
 			<?php
 			# Include the pages
@@ -138,6 +147,16 @@ include_once('core/process/data.loader.php');
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="core/js/bootstrap.min.js"></script>
+		<script>
+			$('.change-city').change(function(){
+				const d = new Date;
+				d.setTime(d.getTime() + 86400 * 30);
+				document.cookie = 'city='+$(this).val()+';expires='+d.toUTCString()+';path=/';
+				location.reload();
+			});
+			const cityLat  = <?= (!$mapCenter == false) ? $mapCenter['lat']  : "null" ?>;
+			const cityLong = <?= (!$mapCenter == false) ? $mapCenter['long'] : "null" ?>;
+		</script>
 
 		<?php // Load scripts only for page
 		if (empty($page)) { ?>

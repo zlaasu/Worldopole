@@ -34,6 +34,7 @@ if ($mysqli->connect_error != '') {
 	die('MySQL connect error');
 }
 
+include_once(SYS_PATH.'/cities.php');
 
 // Update dashboard data
 // the following files are updated every run

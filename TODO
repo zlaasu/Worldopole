@@ -1,0 +1,32 @@
+TODO
+
+cities.php
+- sprawdzic poprawnosc wyliczania promienia na mniejszych lokalizacjach niz warszawa
+
+data.loader.php
+- linia 235 
+	// Trainer with highest Pokemon
+	pytanie zwraca wszystkich trenerow
+
+aru.php
+- linia 563
+	pytanie zwraca wszystkich trenerow
+
+/map/?lat=53.394523&lon=14.671778&zoom=17
+	pusta strona
+
+
+INFO
+
+pokazywanie wszystkich danych na mapach:
+	zmiany w aru.php
+		pokemon,
+		gyms,
+		pokestop,
+		nests (bierze dane z "maps_localization_coordinates" zdefiniowanych dla pokemon)
+	brak zmian dla
+		raids (nie ma mapy)
+		trainers (w ogole nie ruszone)
+
+* crony sa w tej chwili wspolne dla wszystkich miast, ale zapytania sa przygotowane pod rozdzielenie na miasta.
+* w aru.php sa wykomentowane zapytania ograniczajace dane na mapkach do konkretnego miasta

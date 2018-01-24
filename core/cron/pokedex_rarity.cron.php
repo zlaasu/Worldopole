@@ -5,6 +5,7 @@
 $req = "SELECT pokemon_id, COUNT(*) AS spawns_last_day
 		FROM pokemon
 		WHERE disappear_time >= (SELECT MAX(disappear_time) FROM pokemon) - INTERVAL 1 DAY
+		" . ($citySplit ? $limit : '') . "
 		GROUP BY pokemon_id
 		ORDER BY pokemon_id ASC";
 $result = $mysqli->query($req);

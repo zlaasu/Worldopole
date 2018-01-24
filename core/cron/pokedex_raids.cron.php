@@ -22,9 +22,10 @@ for ($pid = 1; $pid <= $maxpid; $pid++) {
                     " . $where."
                 ) x
                 ON r.gym_id = g.gym_id
-                " . $where."
+                " . $where . ($citySplit ? $limit : '') . "
                 ORDER BY start DESC
                 LIMIT 0,1";
+
 	$result = $mysqli->query($req);
 	$data = $result->fetch_object();
 
