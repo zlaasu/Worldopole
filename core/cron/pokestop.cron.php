@@ -9,13 +9,13 @@
 
 $pokestop['timestamp'] = $timestamp;
 
-$req = "SELECT COUNT(*) AS total FROM pokestop WHERE true" . ($citySplit ? $limit : '');
+$req = "SELECT COUNT(*) AS total FROM pokestop WHERE true" . ($citySplit ? $cityLimit : '');
 $result = $mysqli->query($req);
 $data = $result->fetch_object();
 
 $pokestop['total'] = $data->total;
 
-$req = "SELECT COUNT(*) AS total FROM pokestop WHERE lure_expiration >= UTC_TIMESTAMP()" . ($citySplit ? $limit : '');
+$req = "SELECT COUNT(*) AS total FROM pokestop WHERE lure_expiration >= UTC_TIMESTAMP()" . ($citySplit ? $cityLimit : '');
 $result = $mysqli->query($req);
 $data = $result->fetch_object();
 
