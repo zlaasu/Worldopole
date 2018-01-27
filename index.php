@@ -150,7 +150,7 @@ include_once('core/process/data.loader.php');
 		<script>
 			$('.change-city').change(function(){
 				const d = new Date;
-				d.setTime(d.getTime() + 86400 * 30);
+				d.setTime(d.getTime() + 86400 * 1000 * 30);
 				document.cookie = 'city='+$(this).val()+';expires='+d.toUTCString()+';path=/';
 				location.reload();
 			});
