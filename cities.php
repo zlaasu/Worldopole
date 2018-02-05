@@ -13,7 +13,7 @@ $cityID = false;
 $citySplit = false;
 $cityLimit = '';
 
-$req = "SELECT city_id, name, lat, lon, radius_m FROM zlasu_cities WHERE city_id>0 ORDER BY name";
+$req = "SELECT city_id, name, lat, lon, radius_m FROM zlasu_cities WHERE is_active=1 ORDER BY name";
 $result = $mysqli->query($req);
 
 while ($data = $result->fetch_object()) {
