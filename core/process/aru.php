@@ -85,7 +85,7 @@ switch ($request) {
 		// Active Raids
 		// -----------
 
-		$req = "SELECT COUNT(*) AS total FROM raid WHERE start <= UTC_TIMESTAMP AND  end >= UTC_TIMESTAMP()";
+		$req = "SELECT COUNT(*) AS total FROM raid r LEFT JOIN gym g ON g.gym_id=r.gym_id WHERE start <= UTC_TIMESTAMP AND end >= UTC_TIMESTAMP()" . ($citySplit ? $cityLimit : '');
 		$result = $mysqli->query($req);
 		$data = $result->fetch_object();
 
