@@ -50,8 +50,8 @@ else {
 
 $selectCity = '
 <span class="menu-select">
-	choose city: <select class="change-city">
-		<option value="all">all cities</option>
+	<select class="change-city">
+		<option value="all">wybierz miasto</option>
 ';
 foreach ($cities as $k => $v) {
 	$selected = ($k === $cityID) ? " selected" : "";
