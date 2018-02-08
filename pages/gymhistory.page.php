@@ -49,6 +49,7 @@
 					<th>Level</th>
 					<th>Total CP</th>
 					<th>Pokémon</th>
+					<th><?= $locales->GYM_ON_MAP ?></th>
 				</tr>
 			</thead>
 			<tbody id="gymsContainer">

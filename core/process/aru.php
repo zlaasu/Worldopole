@@ -745,7 +745,7 @@ switch ($request) {
 
 		$limit = " LIMIT ".($page * 10).",10";
 
-		$req = "SELECT gymdetails.gym_id, name, team_id, total_cp, (6 - slots_available) as pokemon_count, (CONVERT_TZ(last_modified, '+00:00', '".$time_offset."')) as last_modified
+		$req = "SELECT gymdetails.gym_id, latitude, longitude, name, url, team_id, total_cp, (6 - slots_available) as pokemon_count, (CONVERT_TZ(last_modified, '+00:00', '".$time_offset."')) as last_modified
 				FROM gymdetails
 				LEFT JOIN gym
 				ON gymdetails.gym_id = gym.gym_id
@@ -754,6 +754,10 @@ switch ($request) {
 		$result = $mysqli->query($req);
 		$gyms = array();
 		while ($result && $data = $result->fetch_object()) {
+			$location_link = isset($config->system->location_url) ? $config->system->location_url : 'https://maps.google.com/?q={latitude},{longitude}&ll={latitude},{longitude}&z=16';
+			$location_link = str_replace('{latitude}', $data->latitude, $location_link);
+			$location_link = str_replace('{longitude}', $data->longitude, $location_link);
+			$data->location_link = $location_link;
 			$pkm = array();
 			if ($data->total_cp > 0) {
 				$pkm_req = "SELECT DISTINCT gymmember.pokemon_uid, pokemon_id, cp, trainer_name
@@ -775,6 +779,7 @@ switch ($request) {
 		$json = array();
 		$json['gyms'] = $gyms;
 		$locale = array();
+		$locale['showonmap'] = $locales->GYM_ON_MAP;
 		$json['locale'] = $locale;
 
 		header('Content-Type: application/json');

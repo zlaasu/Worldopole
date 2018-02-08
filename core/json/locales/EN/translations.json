@@ -174,5 +174,6 @@
 "ITEM_MOON_STONE": "Moon Stone",
 "INFO_ATTACK": "Attack",
 "INFO_DEFENSE": "Defense",
-"INFO_STAMINA": "Stamina"
+"INFO_STAMINA": "Stamina",
+"GYM_ON_MAP": "Show on map"
 }

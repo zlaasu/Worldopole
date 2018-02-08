@@ -618,6 +618,11 @@ raids styles
 	}
 }
 
+
+/****************
+gym changes styles
+****************/
+
 #gymsContainer td {
 	vertical-align: middle;
 	line-height: 2em;
@@ -665,7 +670,11 @@ raids styles
 	#gymsContainer td ul li {
 		display: none;
 	}
-	#gymsTable > thead > tr > th:last-child, #gymsTable > tbody > tr:nth-child(2n-1) > td:last-child {
+	#gymsTable > thead > tr > th:nth-last-child(2), 
+	#gymsTable > thead > tr > th:nth-last-child(3), 
+	#gymsTable > tbody > tr:nth-child(2n-1) > td:nth-last-child(2), 
+	#gymsTable > tbody > tr:nth-child(2n-1) > td:nth-last-child(3) 
+	{
 		display: none;
 	}
 }
@@ -683,4 +692,9 @@ raids styles
 .no-link {
 	text-decoration: none;
 	color: inherit;
+}
+
+.gym-img {
+	max-height: 65px;
+	max-width: 80px;
 }
