@@ -11,9 +11,9 @@
 $cities = new stdClass();
 $cityID = false;
 $citySplit = false;
-$limit = '';
+$cityLimit = '';
 
-$req = "SELECT city_id, name, lat, lon, radius_m FROM zlasu_cities WHERE city_id>0 ORDER BY name";
+$req = "SELECT city_id, name, lat, lon, radius_m FROM zlasu_cities WHERE is_active=1 ORDER BY name";
 $result = $mysqli->query($req);
 
 while ($data = $result->fetch_object()) {
@@ -39,7 +39,7 @@ if ($cityID) {
 	$citySplit = true;
 	$lat_dev  = $cities->$cityID->radius / 1000 * 0.008993075;
 	$long_dev = $cities->$cityID->radius / 1000 * 0.014654;
-	$limit = " AND latitude > " . ($cities->$cityID->lat - $lat_dev) . " AND latitude < " . ($cities->$cityID->lat + $lat_dev) . " AND longitude > " . ($cities->$cityID->long - $long_dev) . " AND longitude < " . ($cities->$cityID->long + $long_dev) . " ";
+	$cityLimit = " AND latitude > " . ($cities->$cityID->lat - $lat_dev) . " AND latitude < " . ($cities->$cityID->lat + $lat_dev) . " AND longitude > " . ($cities->$cityID->long - $long_dev) . " AND longitude < " . ($cities->$cityID->long + $long_dev) . " ";
 	$cityName = $cities->$cityID->name;
 	$mapCenter = array("lat"=>$cities->$cityID->lat, "long"=>$cities->$cityID->long);
 }

@@ -17,8 +17,8 @@ include_once('core/process/data.loader.php');
 
 		<!-- Bootstrap -->
 		<link href="core/css/bootstrap.min.css" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Lato:400,300,700" rel="stylesheet" type="text/css">
-		<link href="core/css/font-awesome.min.css" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Lato:400,300,700" rel="stylesheet prefetch" type="text/css">
+		<link href="core/css/font-awesome.min.css" rel="stylesheet prefetch">
 		<link href="<?php auto_ver('core/css/style.css'); ?>" rel="stylesheet">
 		<?php if ($page == "pokemon") { ?>
 			<link href="<?php auto_ver('core/css/jQRangeSlider-bootstrap.min.css'); ?>" rel="stylesheet">
@@ -150,7 +150,7 @@ include_once('core/process/data.loader.php');
 		<script>
 			$('.change-city').change(function(){
 				const d = new Date;
-				d.setTime(d.getTime() + 86400 * 30);
+				d.setTime(d.getTime() + 86400 * 1000 * 30);
 				document.cookie = 'city='+$(this).val()+';expires='+d.toUTCString()+';path=/';
 				location.reload();
 			});
@@ -166,6 +166,7 @@ include_once('core/process/data.loader.php');
 			<script>
 				updateCounter(<?= $home->pokemon_now ?>,'.total-pkm-js');
 				updateCounter(<?= $home->pokestop_lured ?>,'.total-lure-js');
+				updateCounter(<?= $home->active_raids ?>,'.total-raids-js');
 				updateCounter(<?= $home->gyms ?>,'.total-gym-js');
 
 				updateCounter(<?= $home->teams->valor ?>,'.total-valor-js');
@@ -277,6 +278,14 @@ include_once('core/process/data.loader.php');
 
 					<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js"></script>
 					<script src="<?php auto_ver('core/js/raids.content.js') ?>"></script>
+
+					<?php
+					break;
+
+				case 'gymhistory':
+					?>
+
+					<script src="<?php auto_ver('core/js/gymhistory.content.js') ?>"></script>
 
 					<?php
 					break;

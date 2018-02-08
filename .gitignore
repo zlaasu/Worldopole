@@ -26,3 +26,4 @@ config.php
 /core/json/captcha.stats.json
 /core/json/nests.stats.json
 analyticstracking.php
+_OFFLINE/
