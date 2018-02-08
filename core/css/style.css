@@ -121,6 +121,28 @@ Homepage
 	text-align:center;
 }
 
+.flex-container-homepage {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+}
+
+.flex-item-homepage {
+    -webkit-flex: 1 auto;
+    flex: 1 0 200px;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid #f5f5f5;
+}
+
+.flex-item-homepage:last-child {
+    border-right: 0px;
+}
+
 /****************
 Pokedex display
 ****************/
@@ -156,6 +178,10 @@ img.unseen{
 	-webkit-filter: grayscale(1);
 	filter: grayscale(1);
 	opacity:0.5;
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 8px 6px;
 }
 
 .pokemon-single a:hover img	 {
@@ -467,11 +493,18 @@ div#levelMeter .progress{
 
 div#gymPrestige{
 	position: absolute;
-	left:120px;
+	left: 120px;
 	top: 70px;
 	font-size: 14px;
-	
 }
+
+div#gymHistory{
+	position: absolute;
+	left: 220px;
+	top: 70px;
+	font-size: 14px;
+}
+
 div#gymLastScanned{
 	position: absolute;
 	left:120px;
@@ -498,11 +531,11 @@ trainers details styles
 trainers search styles
 ****************/
 
-#searchTrainer button {
+#searchTrainer button, #searchGyms button {
 	height: 40px;
 }
 
-#searchTrainer input {
+#searchTrainer input, #searchGyms input {
 	height: 40px;
 }
 
@@ -542,8 +575,8 @@ raids styles
 	font-size: 2em;
 	font-weight: bold;
 	position: absolute;
-	left: 23px;
-	top: 10px;
+	left: 22px;
+	top: 8px;
 }
 
 #raidsContainer .current, #raidsContainer .upcoming {
@@ -577,13 +610,91 @@ raids styles
 	}
 	#raidsContainer .pokemon-single span {
 		font-size: 1.5em;
-		left: 17px;
-		top: 8px;
+		left: 16px;
+		top: 6px;
 	}
 	#raidsContainer td:nth-child(6) {
 		display: none;
 	}
-	#raidsTable>tbody>tr>td, #raidsTable>tbody>tr>th, #raidsTable>tfoot>tr>td, #raidsTable>tfoot>tr>th, #raidsTable>thead>tr>td, #raidsTable>thead>tr>th {
-		padding: 6px
+}
+
+
+/****************
+gym changes styles
+****************/
+
+#gymsContainer td {
+	vertical-align: middle;
+	line-height: 2em;
+}
+
+#gymsContainer .gymhistory table td:first-child, #gymsContainer .gymhistory table th:first-child {
+	padding-left: 10px;
+}
+
+#gymsContainer td.level {
+	width: 68px;
+}
+
+#gymsContainer td.level img {
+	margin-right: .5em;
+}
+
+#gymsContainer td.loss {
+	color: rgb(210,118,118);
+}
+
+#gymsContainer td.gain {
+	color: rgb(62,150,62);
+}
+
+#gymsContainer td ul {
+	margin-bottom: 0;
+	min-height: 65px;
+	line-height: initial;
+}
+
+#gymsContainer td ul li {
+	width: 5em;
+	overflow: hidden;
+	text-align: center;
+	border-radius: 5px;
+	margin-right: 2px;
+}
+
+#gymsTable > thead > tr > th:nth-child(1) {
+	width: 6.5em;
+}
+
+@media (max-width: 768px) {
+	#gymsContainer td ul li {
+		display: none;
 	}
+	#gymsTable > thead > tr > th:nth-last-child(2), 
+	#gymsTable > thead > tr > th:nth-last-child(3), 
+	#gymsTable > tbody > tr:nth-child(2n-1) > td:nth-last-child(2), 
+	#gymsTable > tbody > tr:nth-child(2n-1) > td:nth-last-child(3) 
+	{
+		display: none;
+	}
+}
+
+#gymsContainer td ul li.new {
+	background-color: rgba(62,150,62,.25);
+	display: inline-block !important;
+}
+
+#gymsContainer td ul li.old {
+	background-color: rgba(210,118,118,.25);
+	display: inline-block !important;
+}
+
+.no-link {
+	text-decoration: none;
+	color: inherit;
+}
+
+.gym-img {
+	max-height: 65px;
+	max-width: 80px;
 }
