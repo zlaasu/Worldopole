@@ -652,6 +652,8 @@ gym changes styles
 	margin-bottom: 0;
 	min-height: 65px;
 	line-height: initial;
+	display: flex;
+	align-items: center;
 }
 
 #gymsContainer td ul li {
