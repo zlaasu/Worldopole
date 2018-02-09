@@ -768,6 +768,9 @@ switch ($request) {
 							ORDER BY deployment_time";
 				$pkm_result = $mysqli->query($pkm_req);
 				while ($pkm_result && $pkm_data = $pkm_result->fetch_object()) {
+					if ($config->system->no_trainer_name === true) {
+						unset($pkm_data->trainer_name);
+					}
 					$pkm[] = $pkm_data;
 				}
 			}
